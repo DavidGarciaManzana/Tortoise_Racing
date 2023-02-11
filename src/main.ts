@@ -25,13 +25,30 @@
 // or Google: "convert decimal time to hours minutes seconds"
 
 
-const race = (v1: number, v2: number, g: number) => {
+const race = (v1: number, v2: number, g: number): number[] => {
+    let hours = 0
+    let minutes = 0
+    let seconds = 0
+    let time: number[] = [];
 
+    const getTime = () => {
+        transformTime(g / (v2 - v1))
+        return time
+    }
+    const transformTime = (hoursObtained: number) => {
+        hours=Math.floor(hoursObtained)
+        minutes= (hoursObtained % 1 )* 60
+        seconds=(minutes % 1)*60
+
+        time.push(hours,minutes,seconds)
+        return time
+    }
+    return getTime()
 }
 
 
-console.log(720, 850, 70)// [0, 32, 18]);
-console.log(80, 91, 37)// [3, 21, 49]);
-console.log(80, 100, 40)// [2, 0, 0]);
-console.log(720, 850, 37)// [0, 17, 4]);
+console.log(race(720, 850, 70))// [0, 32, 18]);
+console.log(race(80, 91, 37))// [3, 21, 49]);
+console.log(race(80, 100, 40))// [2, 0, 0]);
+console.log(race(720, 850, 37))// [0, 17, 4]);
 
